@@ -6,7 +6,9 @@ declare(strict_types=1);
 namespace Tepeng\LaravelEasemob\Tests;
 
 use Exception;
+use Tepeng\LaravelEasemob\Api\Authorization;
 use Tepeng\LaravelEasemob\Api\Community;
+use Tepeng\LaravelEasemob\Api\User\UserSystem;
 
 
 /**
@@ -14,6 +16,25 @@ use Tepeng\LaravelEasemob\Api\Community;
  */
 class ImTest extends Tests
 {
+
+    /**
+     * @return void
+     * @throws Exception
+     */
+    public function testAuthorizeRegister()
+    {
+        $this->getAppToken();
+
+        $result = (new UserSystem($this->config))
+            ->authorizeRegister([
+                'username' => 24, 'password' => '24-'.'3d66'
+            ]);
+        if(isset($result['code']) && $result['code'] == 200) {
+            $this->assertTrue(true);
+            return;
+        }
+        $this->fail();
+    }
 
     /**
      * @return void
@@ -35,6 +56,7 @@ class ImTest extends Tests
         }
         $this->fail();
     }
+
 
 
     /**

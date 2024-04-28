@@ -36,7 +36,7 @@ class Authorization extends Api
                 'client_id'     => $this->config->client_id,
                 'client_secret' => $this->config->client_secret,
                 'ttl'           => self::APP_TOKEN_TTL,
-            ],true,true);
+            ],false,true);
 
             if(empty($result['access_token'])) {
                 throw new LogicException('app token获取失败');

@@ -21,12 +21,17 @@ class UserSystem extends Api
      */
     public function authorizeRegister(array $params) :array
     {
-        return $this->post(
-            $this->getHost().'/users',
-            array_merge($params,$this->config->getConfig()),
-            false,
-            true
-        );
+        try {
+            return $this->post(
+                $this->getHost().'/users',
+                array_merge($params,$this->config->getConfig())
+            );
+        }catch (\Throwable $e) {
+            return [
+                'code' => 0,
+                'message' => $e->getMessage(),
+            ];
+        }
     }
 
     /**
