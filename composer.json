@@ -1,0 +1,36 @@
+{
+    "name": "tepeng/3d66-laravel-easemob",
+    "description": "这是一个基于环信超级社区Api封装的laravel第三方扩展包。",
+    "type": "project",
+    "keywords": ["easemob", "3d66"],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tepeng\\LaravelEasemob\\": "src/",
+            "Tepeng\\LaravelEasemob\\Tests\\": "tests/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require": {
+        "php": "^8",
+        "illuminate/support": "~9|~10"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.6.x-dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tepeng\\LaravelEasemob\\LaravelEasemobServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "pl1998"
+        }
+    ],
+    "minimum-stability": "dev"
+}
