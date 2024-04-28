@@ -10,7 +10,7 @@
 * Laravel 9~10
 
 ```shell
-composer require pl1998/laravel-easemob:dev-master
+composer require tepeng/3d66-laravel-easemob:dev-master
 ```
 
 ###  配置发布
