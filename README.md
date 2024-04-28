@@ -152,3 +152,7 @@ class ChannelMessageBody extends Body implements BodyInterface
     /** @var string DELETE https://{host}/{org_name}/{app_name}/circle/channel/category/{channel_category_id}?serverId={server_id} */
     public const DEL_SERVER_GROUP = '/circle/channel/category/%s';
 ```
+#### 测试
+```shell
+./vendor/bin/phpunit tests/
+```
