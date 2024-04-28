@@ -2,7 +2,7 @@
 
 > 这是一个基于环信超级社区Api封装的laravel第三方扩展包。
 
-*   [环信官方文档](https://doc.easemob.com/document/server-side/overview.html)
+*   [环信官方文档](https://doc.easemob.com/product/circle/server_mgmt_rest.html)
 *   [环信后台](https://console.easemob.com/user/login)
 
 ### 依赖

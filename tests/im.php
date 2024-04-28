@@ -14,10 +14,10 @@ return [
     |
     */
     'super_community' => [
-        'host'          => env('IM_SUPER_COMMUNITY_HOST'),
-        'org_name'      => env('IM_SUPER_COMMUNITY_ORG_NAME'),
-        'app_name'      => env('IM_SUPER_COMMUNITY_APP_NAME'),
-        'client_id'     => env('IM_SUPER_COMMUNITY_CLIENT_ID'),
-        'client_secret' => env('IM_SUPER_COMMUNITY_CLIENT_SECRET'),
+        'host'          => 'a1.easemob.com',
+        'org_name'      => '1126240125169917',
+        'app_name'      => 'demo',
+        'client_id'     => 'YXA6wtUPq45dR2a2M7qetVFfqA',
+        'client_secret' => 'YXA6GnKa6H3b1BeSd7cesU0xHl0PHG8',
     ],
 ];

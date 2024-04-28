@@ -20,19 +20,62 @@ class ImTest extends Tests
      * @return void
      * @throws BindingResolutionException
      */
-    public function testCreateServer()
-    {
-        $configs = require __DIR__ . '/config.php';
+//    public function testCreateServer()
+//    {
+//        $this->getAppToken();
+//
+//        $result = (new Community($this->config))
+//            ->create([
+//                'owner' => 1,
+//                'name' => '测试社区',
+//                'type' => 0,
+//            ]);
+//        if(isset($result['code']) && $result['code'] == 200) {
+//            $this->assertTrue(true);
+//            return;
+//        }
+//        $this->assertTrue(false);
+//    }
 
-        $config = (new Config($configs['super_community']));
-        $config->setToken('token');
-        $result = (new Community($config))
-            ->create([
-                'owner' => 1,
-                'name' => '测试社区',
+    /**
+     * 测试-更新服务器
+     *
+     * @return void
+     * @throws BindingResolutionException
+     */
+    public function testUpdateServer()
+    {
+        $this->getAppToken();
+
+        $result = (new Community($this->config))
+            ->update('1d4cYfyprm6BmHfjGlsv8SS782s',[
+                'name' => '测试社区2',
                 'type' => 0,
+                'description' => '描述'
             ]);
-        IF(isset($result['status']) && $result['status'] == 200) {
+
+        if(isset($result['code']) && $result['code'] == 200) {
+            $this->assertTrue(true);
+            var_dump($result);
+            return;
+        }
+        $this->assertTrue(false);
+    }
+
+    /**
+     * 测试-更新服务器
+     *
+     * @return void
+     * @throws BindingResolutionException
+     */
+    public function testGetServerInfo()
+    {
+        $this->getAppToken();
+
+        $result = (new Community($this->config))
+            ->details('1d4cYfyprm6BmHfjGlsv8SS782s');
+
+        if(isset($result['code']) && $result['code'] == 200) {
             $this->assertTrue(true);
             return;
         }

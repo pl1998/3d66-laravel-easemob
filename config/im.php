@@ -18,6 +18,6 @@ return [
         'org_name'      => env('IM_SUPER_COMMUNITY_ORG_NAME'),
         'app_name'      => env('IM_SUPER_COMMUNITY_APP_NAME'),
         'client_id'     => env('IM_SUPER_COMMUNITY_CLIENT_ID'),
-        'client_secret' => env('IM_SUPER_COMMUNITY_CLIENT_SECRET'),
+        'client_secret' => env('IM_SUPER_COMMUNITY_CLIENT_SECRET')
     ],
 ];

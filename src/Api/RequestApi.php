@@ -6,12 +6,10 @@ declare(strict_types=1);
 namespace Tepeng\LaravelEasemob\Api;
 
 use Exception;
-use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 trait RequestApi
 {
-
-
     /**
      * @param string $host
      * @param array $params
@@ -26,11 +24,20 @@ trait RequestApi
         bool $withoutVerifying = false) :array
     {
         try {
-            $http = Http::withToken($this->config->token);
-            $withoutVerifying && $http->withoutVerifying();
-            $isBody && $http = $http->acceptJson();
-            $response = $http->post($host,$params);
-            return $response->json();
+            $response = (new Client([
+                'base_uri' => $host,
+                'timeout'  => 20,
+                'headers' => [
+                    'Authorization' =>  "Bearer {$this->config->token}",
+                    'Content-Type'  => 'application/json',
+                ],
+                'verify'   => !$withoutVerifying
+            ]))
+                ->post($host,[
+                   'json' => $params
+                ]);
+            $contents=  $response->getBody()->getContents();
+            return json_decode($contents,true);
         }catch (Exception $e) {
             throw new $e;
         }
@@ -47,11 +54,20 @@ trait RequestApi
     public function delete(string $host, array $params = [], bool $isBody = false, bool $withoutVerifying = false) :array
     {
         try {
-            $http = Http::withToken($this->config->token);
-            $withoutVerifying && $http->withoutVerifying();
-            $isBody && $http = $http->acceptJson();
-            $response = $http->delete($host,$params);
-            return $response->json();
+            $response = (new Client([
+                'base_uri' => $host,
+                'timeout'  => 20,
+                'headers' => [
+                    'Authorization' =>  "Bearer {$this->config->token}",
+                    'Content-Type'  => 'application/json',
+                ],
+                'verify'   => !$withoutVerifying
+            ]))
+                ->delete($host,[
+                    'json' => $params
+                ]);
+            $contents=  $response->getBody()->getContents();
+            return json_decode($contents,true);
         }catch (Exception $e) {
             throw new $e;
         }
@@ -75,12 +91,20 @@ trait RequestApi
     ) :array
     {
         try {
-            $http = Http::withToken($this->config->token);
-            $withoutVerifying && $http->withoutVerifying();
-            $asForm && $http->asForm();
-            $isBody && $http->acceptJson();
-            $response = $http->put($host,$params);
-            return $response->json();
+            $response = (new Client([
+                'base_uri' => $host,
+                'timeout'  => 20,
+                'headers' => [
+                    'Authorization' =>  "Bearer {$this->config->token}",
+                    'Content-Type'  => 'application/json',
+                ],
+                'verify'   => !$withoutVerifying
+            ]))
+                ->put($host,[
+                    'json' => $params
+                ]);
+            $contents=  $response->getBody()->getContents();
+            return json_decode($contents,true);
         }catch (Exception $e) {
             throw new $e;
         }
@@ -96,10 +120,19 @@ trait RequestApi
     public function get(string $host,array $params = [], bool $withoutVerifying = false): mixed
     {
         try {
-            $http = Http::withToken($this->config->token);
-            $withoutVerifying && $http->withoutVerifying();
-            $response = $http->get($host.'?'.http_build_query($params));
-            return $response->json();
+            $host = $host.'?'.http_build_query($params);
+            $response = (new Client([
+                'base_uri' => $host,
+                'timeout'  => 20,
+                'headers' => [
+                    'Authorization' =>  "Bearer {$this->config->token}",
+                    'Content-Type'  => 'application/json',
+                ],
+                'verify'   => !$withoutVerifying
+            ]))
+                ->get($host);
+            $contents=  $response->getBody()->getContents();
+            return json_decode($contents,true);
         }catch (Exception $e) {
             throw new $e;
         }

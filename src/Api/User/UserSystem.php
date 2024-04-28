@@ -2,6 +2,7 @@
 
 namespace Tepeng\LaravelEasemob\Api\User;
 
+use Exception;
 use Tepeng\LaravelEasemob\Api\Api;
 use Tepeng\LaravelEasemob\Enum\UserEnum;
 use Illuminate\Support\Arr;
@@ -16,26 +17,25 @@ class UserSystem extends Api
             'password' => '3d66' 用户的登录密码，长度不可超过 64 个字符
         ]
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function authorizeRegister(array $params)
+    public function authorizeRegister(array $params) :array
     {
-        $response = $this->post(
+        return $this->post(
             $this->getHost().'/users',
             array_merge($params,$this->config->getConfig()),
             false,
             true
         );
-        return $response;
     }
 
     /**
      * 获取单个用户的详情
      * @param string $username 神策的用户ID
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function userDetail(string $username)
+    public function userDetail(string $username) :array
     {
         return $this->post(
             $this->getHost().sprintf('/users/%s',$username),
@@ -50,9 +50,9 @@ class UserSystem extends Api
      * @param string $username 神策的用户ID
      * @param string $newpassword
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function editPassword(string $username,string $newpassword)
+    public function editPassword(string $username,string $newpassword) :array
     {
         return $this->post(
             $this->getHost().sprintf('/users/%s/%s',$username,$newpassword),
@@ -65,10 +65,10 @@ class UserSystem extends Api
     /**
      * 获取用户属性
      * @param string $username
-     * @return array
-     * @throws \Exception
+     * @return mixed
+     * @throws Exception
      */
-    public function getUserAttr(string $username)
+    public function getUserAttr(string $username) :mixed
     {
         return $this->get($this->getHost().sprintf(UserEnum::USER_ATTR_HOST,$username),[],true);
     }
@@ -77,9 +77,9 @@ class UserSystem extends Api
      * 编辑用户属性
      * @param array $params
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function editUserAttr(array $params)
+    public function editUserAttr(array $params) :array
     {
         return $this->put(
             $this->getHost().sprintf(UserEnum::USER_ATTR_HOST,$params['user_id']),
@@ -92,11 +92,11 @@ class UserSystem extends Api
 
     /**
      * 删除用户
-     * @param $userId
+     * @param int $userId
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function deleteUser(int $userId)
+    public function deleteUser(int $userId) :array
     {
         return $this->delete(
             $this->getHost().sprintf(UserEnum::USER_DELETE_HOST,$userId),
