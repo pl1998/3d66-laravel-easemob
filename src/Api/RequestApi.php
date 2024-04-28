@@ -24,6 +24,7 @@ trait RequestApi
         bool $withoutVerifying = false) :array
     {
         try {
+
             $response = (new Client([
                 'base_uri' => $host,
                 'timeout'  => 20,

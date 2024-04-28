@@ -17,6 +17,21 @@ use Tepeng\LaravelEasemob\Api\User\UserSystem;
 class ImTest extends Tests
 {
 
+
+    public function getUserToken()
+    {
+        $this->getAppToken();
+
+
+        $result = (new Authorization($this->config))
+            ->getUserToken(177254937 );
+
+        if(isset($result['entities'])) {
+            $this->assertTrue(true);
+            return;
+        }
+        $this->fail();
+    }
     public function testPutUsers()
     {
         $this->getAppToken();

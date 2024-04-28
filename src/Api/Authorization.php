@@ -66,14 +66,10 @@ class Authorization extends Api
             'grant_type'     => 'inherit',
             'username'       => $userId,
             'autoCreateUser' => true,
-        ],true,true);
-
+        ]);
         if(empty($result['access_token'])) {
-            Log::error('用户token获取失败：'.$userId.' '.json_encode($result,JSON_UNESCAPED_UNICODE));
-
             return '';
         }
-
         return $result['access_token'];
     }
 }
