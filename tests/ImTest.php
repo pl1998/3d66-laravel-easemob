@@ -17,6 +17,39 @@ use Tepeng\LaravelEasemob\Api\User\UserSystem;
 class ImTest extends Tests
 {
 
+    public function testPutUsers()
+    {
+        $this->getAppToken();
+
+        $result = (new UserSystem($this->config))
+            ->editUserAttr([
+                'nickname'    => '178547911',
+                'user_id'    => '178547911',
+                'avatarurl'   =>'https://static.3d66.com/public/images/common/defaultHead.jpg',
+                'gender'      => 0,
+                'sign'        => '测试',
+            ]);
+
+        if(isset($result['data'])) {
+            $this->assertTrue(true);
+            return;
+        }
+        $this->fail();
+    }
+    public function testGetUsers()
+    {
+        $this->getAppToken();
+
+        $result = (new UserSystem($this->config))
+            ->userDetail('178547911');
+
+        if(isset($result['entities'])) {
+            $this->assertTrue(true);
+            return;
+        }
+        $this->fail();
+    }
+
     /**
      * @return void
      * @throws Exception

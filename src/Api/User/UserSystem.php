@@ -88,9 +88,9 @@ class UserSystem extends Api
     {
         return $this->put(
             $this->getHost().sprintf(UserEnum::USER_ATTR_HOST,$params['user_id']),
-            Arr::only($params,['nickname','avatarurl','phone','mail','gender','sign','birth']),
-            false,
+            $params,
             true,
+            false,
             true
         );
     }

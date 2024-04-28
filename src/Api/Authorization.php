@@ -61,6 +61,7 @@ class Authorization extends Api
     public function getUserToken($userId)
     {
         $host = sprintf($this->getHost().ApiEnum::AUTHORIZATION_API,$this->config->host,$this->config->org_name,$this->config->app_name);
+
         $result = $this->post($host,[
             'grant_type'     => 'inherit',
             'username'       => $userId,
