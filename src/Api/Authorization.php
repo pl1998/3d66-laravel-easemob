@@ -20,6 +20,9 @@ class Authorization extends Api
     {
         try {
             $fileName  = __DIR__.'/app_token.cache';
+            if(!file_exists($fileName)) {
+                touch($fileName);
+            }
             $contents = file_get_contents($fileName);
             if(!empty($contents)) {
                 $contents = unserialize($contents);
@@ -44,6 +47,7 @@ class Authorization extends Api
             ]));
             return $result;
         }catch (Exception $e) {
+            @unlink($fileName);
             throw new $e;
         }
     }
