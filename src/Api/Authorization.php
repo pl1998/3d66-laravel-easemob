@@ -47,7 +47,6 @@ class Authorization extends Api
             ]));
             return $result;
         }catch (Exception $e) {
-            @unlink($fileName);
             throw new $e;
         }
     }
