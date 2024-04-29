@@ -24,7 +24,7 @@ class ImTest extends Tests
 
 
         $result = (new Authorization($this->config))
-            ->getUserToken(177254937 );
+            ->getUserToken(177254937);
 
         if(isset($result['entities'])) {
             $this->assertTrue(true);

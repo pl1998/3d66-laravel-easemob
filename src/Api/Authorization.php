@@ -6,29 +6,29 @@ declare(strict_types=1);
 namespace Tepeng\LaravelEasemob\Api;
 
 
+use Illuminate\Support\Facades\Redis;
 use Tepeng\LaravelEasemob\Enum\ApiEnum;
 use Exception;
 use LogicException;
 class Authorization extends Api
 {
-    const APP_TOKEN_TTL = 3600 * 10;
+    /** @var float|int  */
+    protected const APP_TOKEN_TTL = 3600 * 10;
+    /** @var string  */
+    protected  const APP_TOKEN_KEY = 'im:app:token:key';
     /**
      * @return array
      * @throws Exception
      */
-    public function getToken(): array
+    public function getToken(array $config = []): array
     {
         try {
-            $fileName  = __DIR__.'/app_token.cache';
-            if(!file_exists($fileName)) {
-                touch($fileName);
+            if(empty($config)) {
+                $config = config('im.super_community');
             }
-            $contents = file_get_contents($fileName);
-            if(!empty($contents)) {
-                $contents = unserialize($contents);
-                if(time()<($contents['expiration'])) {
-                    return $contents['data'];
-                }
+            $result = Redis::get($config['app_token_key'] ?? self::APP_TOKEN_KEY);
+            if($result) {
+                return json_decode($result,true);
             }
             $host = sprintf($this->getHost().ApiEnum::AUTHORIZATION_API,$this->config->host,$this->config->org_name,$this->config->app_name);
             $result = $this->post($host,[
@@ -41,10 +41,9 @@ class Authorization extends Api
             if(empty($result['access_token'])) {
                 throw new LogicException('app token获取失败');
             }
-            file_put_contents($fileName,serialize([
-                'data'       => $result,
-                'expiration' => time()+(self::APP_TOKEN_TTL - 60)
-            ]));
+            Redis::setex($config['app_token_key'] ?? self::APP_TOKEN_KEY,$config['app_token_ttl'] ?? self::APP_TOKEN_TTL,
+                json_encode($result,JSON_UNESCAPED_UNICODE)
+            );
             return $result;
         }catch (Exception $e) {
             throw new $e;

@@ -19,5 +19,7 @@ return [
         'app_name'      => 'demo',
         'client_id'     => 'YXA6wtUPq45dR2a2M7qetVFfqA',
         'client_secret' => 'YXA6GnKa6H3b1BeSd7cesU0xHl0PHG8',
+        'app_token_ttl' => 36000, // 单位秒
+        'app_token_key' => 'im:app:token:key',
     ],
 ];

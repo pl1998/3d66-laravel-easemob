@@ -17,6 +17,11 @@ composer require tepeng/3d66-laravel-easemob:dev-master
 ```shell
 php artisan vendor:publish --provider="Tepeng\LaravelEasemob\LaravelEasemobServiceProvider"  --force
 ```
+### 清理AppToken
+```shell
+php artisan easemob:token:clear
+```
+
 ### 简单使用
 
 举例 ：发送消息

@@ -28,7 +28,7 @@ class Tests extends \PHPUnit\Framework\TestCase
         $configs = $this->getConfig();
         $this->config = (new Config($configs['super_community']));
         $result = (new Authorization($this->config))
-            ->getToken();
+            ->getToken($configs['super_community']);
         $this->config->setToken($result['access_token']);
         return $this;
     }

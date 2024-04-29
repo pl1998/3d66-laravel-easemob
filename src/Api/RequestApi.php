@@ -125,17 +125,17 @@ trait RequestApi
     public function get(string $host,array $params = [], bool $withoutVerifying = false): mixed
     {
         try {
-            $host = $host.'?'.http_build_query($params);
-            $response = (new Client([
-                'base_uri' => $host,
-                'timeout'  => 20,
-                'headers' => [
-                    'Authorization' =>  "Bearer {$this->config->token}",
-                    'Content-Type'  => 'application/json',
-                ],
-                'verify'   => !$withoutVerifying
-            ]))
-                ->get($host);
+            if(!empty($params)) {
+                $host = $host.'?'.http_build_query($params);
+            }
+            $response = (new Client())
+                ->request('GET',$host,[
+                    'timeout'  => 20,
+                    'headers' => [
+                        'Authorization' =>  "Bearer {$this->config->token}"
+                    ],
+                    'verify'   => !$withoutVerifying
+                ]);
             $contents=  $response->getBody()->getContents();
             return json_decode($contents,true);
         }catch (Exception $e) {

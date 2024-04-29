@@ -18,6 +18,8 @@ return [
         'org_name'      => env('IM_SUPER_COMMUNITY_ORG_NAME'),
         'app_name'      => env('IM_SUPER_COMMUNITY_APP_NAME'),
         'client_id'     => env('IM_SUPER_COMMUNITY_CLIENT_ID'),
-        'client_secret' => env('IM_SUPER_COMMUNITY_CLIENT_SECRET')
+        'client_secret' => env('IM_SUPER_COMMUNITY_CLIENT_SECRET'),
+        'app_token_ttl' => 36000, // 单位秒
+        'app_token_key' => 'im:app:token:key',
     ],
 ];

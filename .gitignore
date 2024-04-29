@@ -1,4 +1,5 @@
-.idea
+/.idea
 vendor
-.phpunit.cache
+/.phpunit.cache
 src/Api/app_token.cache
+/.vscode
